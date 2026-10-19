@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>NIGHTOS</title>
+<meta name="theme-color" content="#07070c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NIGHTOS">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--y:#fcee09;--c:#00f0ff;--r:#ff2a6d;--g:#9dff00;--bg:#07070c;--p:#11111b;--t:#ecece6;--m:#77778c;--a:var(--y)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%;color:var(--t);font:600 17px/1.2 Rajdhani,'Arial Narrow',system-ui,sans-serif;letter-spacing:.04em;overscroll-behavior:none}
+body{background:radial-gradient(circle at 100% 0,#ff2a6d28,transparent 45%),radial-gradient(circle at 0 100%,#00f0ff22,transparent 45%),linear-gradient(#ffffff07 1px,transparent 1px) 0 0/100% 28px,var(--bg);padding:env(safe-area-inset-top) 0 calc(84px + env(safe-area-inset-bottom))}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(#0000 0 2px,#00000030 2px 3px);z-index:90}
+button{font-family:inherit;color:inherit}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 18px}
+.logo{font:900 22px Orbitron,sans-serif;color:var(--y);text-shadow:2px 0 var(--r),-2px 0 var(--c);animation:gl 6s steps(1) infinite}
+.logo b{color:var(--c)}
+@keyframes gl{0%,94%,100%{transform:none}95%{transform:translateX(3px)}97%{transform:translateX(-3px) skewX(-8deg)}}
+@media(prefers-reduced-motion:reduce){.logo{animation:none}}
+.lv{font:700 12px Orbitron,sans-serif;color:var(--c);text-align:right}
+.lv i{display:block;width:90px;height:6px;margin-top:5px;background:#ffffff18;clip-path:polygon(0 0,100% 0,calc(100% - 4px) 100%,0 100%)}
+.lv u{display:block;height:100%;background:var(--c);box-shadow:0 0 8px var(--c);transition:width .4s}
+main{padding:0 16px}
+h2{font:900 20px Orbitron,sans-serif;color:var(--a);margin:6px 0 14px;text-shadow:0 0 14px var(--a)}
+.hero{margin:4px 0 18px;font:700 14px Orbitron,sans-serif;color:var(--m)}
+.hero b{color:var(--y)}.hero small{display:block;margin-top:6px;font:600 15px Rajdhani,sans-serif}
+.tiles,.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tile{position:relative;aspect-ratio:1;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:14px;text-align:left;background:linear-gradient(160deg,#ffffff14,transparent 60%),var(--p);border:0;border-left:3px solid var(--a);clip-path:polygon(0 0,100% 0,100% calc(100% - 24px),calc(100% - 24px) 100%,0 100%)}
+.tile:before{content:"";position:absolute;top:0;right:0;width:44px;height:3px;background:var(--a)}
+.tile em{font-size:62px;font-style:normal;line-height:1;margin-bottom:auto;filter:drop-shadow(0 0 10px var(--a))}
+.tile strong{font:900 15px Orbitron,sans-serif;color:var(--a)}.tile small{color:var(--m);font-size:15px}
+.tile:active,.card:active{transform:scale(.96)}
+.tabs{display:flex;gap:8px;margin-bottom:14px}
+.tabs button{flex:1;padding:10px 0;font:700 11px Orbitron,sans-serif;color:var(--m);background:var(--p);border:1px solid #ffffff14}
+.tabs .on{color:#000;background:var(--a);border-color:var(--a)}
+.grid{gap:12px}
+.card{position:relative;background:var(--p);border-left:3px solid var(--a);clip-path:polygon(0 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%);transition:transform .15s}
+.ph{aspect-ratio:1;background:#0b0b13 center/cover;display:grid;place-items:center;font-size:58px}
+.nm{padding:10px 12px 16px;word-break:break-word}
+.bd{position:absolute;top:8px;left:8px;padding:3px 7px;font:700 9px Orbitron,sans-serif;color:#000;background:var(--a)}
+.ac{position:absolute;top:6px;right:6px;display:flex;gap:4px}
+.ac button{width:32px;height:32px;background:#000b;border:1px solid #ffffff30;font-size:14px}
+.done .ph{filter:grayscale(1) brightness(.55)}.done .nm{opacity:.5;text-decoration:line-through}.done .bd{background:var(--g)}
+.fab{position:fixed;right:20px;bottom:calc(92px + env(safe-area-inset-bottom));width:62px;height:62px;font-size:34px;font-weight:900;color:#000;background:var(--a);border:0;z-index:20;clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%)}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:#0a0a10f2;border-top:1px solid #ffffff18;padding-bottom:env(safe-area-inset-bottom);z-index:30;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+nav button{flex:1;padding:10px 0 8px;background:none;border:0;color:var(--m);font:700 9px Orbitron,sans-serif;display:flex;flex-direction:column;gap:4px;align-items:center}
+nav span{font-size:23px;filter:grayscale(1) opacity(.6)}nav .on{color:var(--y)}nav .on span{filter:none}
+.empty{grid-column:1/-1;text-align:center;color:var(--m);padding:34px 0;font:700 12px Orbitron,sans-serif}
+#m{position:fixed;inset:0;background:#000b;display:none;align-items:flex-end;z-index:60;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}#m.on{display:flex}
+.sheet{width:100%;max-height:92%;overflow:auto;padding:20px 18px calc(24px + env(safe-area-inset-bottom));background:var(--p);border-top:3px solid var(--a)}
+.sheet h3,.sd{font:900 13px Orbitron,sans-serif;color:var(--a);margin-bottom:14px}
+input{width:100%;padding:13px;margin-bottom:12px;font:600 18px Rajdhani,sans-serif;color:var(--t);background:#000;border:1px solid #ffffff2a;border-radius:0;outline:0;min-width:0}
+input:focus{border-color:var(--a)}
+.ems{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.ems b{width:46px;height:46px;display:grid;place-items:center;font-size:26px;background:#000;border:1px solid #ffffff22}
+.ems .on{border-color:var(--a);background:#ffffff18}
+.file{display:grid;gap:10px;padding:14px;margin-bottom:16px;border:1px dashed var(--a);color:var(--a);font:700 12px Orbitron,sans-serif;text-align:center}
+.file img{width:100%;max-height:200px;object-fit:cover}
+.ck{display:flex;align-items:center;gap:10px;margin-bottom:16px;color:var(--m)}.ck input{width:auto;margin:0}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.b1,.b2{padding:14px;font:900 12px Orbitron,sans-serif;border:0;text-align:center}
+.b1{background:var(--a);color:#000}.b2{background:#ffffff14}
+.mh{display:flex;justify-content:space-between;align-items:center;font:900 14px Orbitron,sans-serif;margin-bottom:10px}
+.mh button{width:46px;height:40px;background:var(--p);color:var(--a);border:1px solid #ffffff18}
+.wk,.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.wk i{font:700 11px Orbitron,sans-serif;color:var(--m);font-style:normal;padding:4px 0}
+.cg b{position:relative;aspect-ratio:1;display:grid;place-items:center;background:var(--p);font-size:17px;font-weight:700}
+.cg .td{color:var(--y);box-shadow:inset 0 0 0 1px var(--y)}.cg .sl{background:var(--a);color:#000}
+.cg .hv:after{content:"";position:absolute;bottom:4px;width:5px;height:5px;background:var(--c);box-shadow:0 0 6px var(--c)}
+.sd{margin:20px 0 10px}
+.ev{display:flex;align-items:center;gap:12px;padding:12px;margin-bottom:8px;background:var(--p);border-left:3px solid var(--c)}
+.ev span{font:700 12px Orbitron,sans-serif;color:var(--c)}.ev p{flex:1}
+.ev button{background:none;border:0;color:var(--m);font-size:18px;padding:4px 8px}
+.panel{display:grid;gap:12px;padding:18px;background:var(--p);border-left:3px solid var(--a)}.panel p{color:var(--m)}
+</style></head><body>
+<header><div class="logo">NIGHT<b>OS</b></div><div class="lv"><span id="lv"></span><i><u id="xp"></u></i></div></header>
+<main id="v"></main>
+<nav>
+<button data-v="home" onclick="go('home')"><span>◈</span>HOME</button>
+<button data-v="buy" onclick="go('buy')"><span>🛒</span>COMPRAR</button>
+<button data-v="task" onclick="go('task')"><span>✅</span>TAREFAS</button>
+<button data-v="cal" onclick="go('cal')"><span>📅</span>AGENDA</button>
+</nav>
+<div id="m"></div>
+<script>
+const $=s=>document.querySelector(s),uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5),
+esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';'),
+iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),
+fmt=s=>new Date(s+'T00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'}).toUpperCase(),
+MES=['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'],
+K={buy:{t:'COMPRAR',a:'var(--y)',on:'COMPRADO',off:'PENDENTE',em:['🛍️','👟','👕','🎧','📱','💻','🎮','🍔','💊','🎁','🏠','🔧']},
+task:{t:'TAREFAS',a:'var(--c)',on:'FEITO',off:'PENDENTE',em:['🏋️','📚','🛒','🧹','🍳','💼','💧','🚗','🧘','📞','💰','🎯']}},
+COR={home:'var(--y)',buy:'var(--y)',task:'var(--c)',cal:'var(--r)',sys:'var(--g)'};
+let S;try{S=JSON.parse(localStorage.getItem('nightos'))}catch(e){}
+S=S||{buy:[],task:[],ev:[]};
+let V='home',fl='all',C=new Date(),sel=iso(new Date()),draft;C.setDate(1);
+const save=()=>{try{localStorage.setItem('nightos',JSON.stringify(S))}catch(e){alert('ARMAZENAMENTO CHEIO. Exclua itens com foto ou exporte um backup.')}};
+const evs=s=>S.ev.filter(e=>e.d==s||(e.y&&e.d.slice(5)==s.slice(5)));
+const pl=n=>n+' PENDENTE'+(n==1?'':'S');
+
+function vh(){const p=k=>S[k].filter(i=>!i.d).length,td=iso(new Date()),up=S.ev.filter(e=>e.d>=td||e.y).length;
+const T=[['buy','🛒','COMPRAR',pl(p('buy')),'var(--y)'],['task','✅','TAREFAS',pl(p('task')),'var(--c)'],['cal','📅','AGENDA',up+' PRÓXIMO'+(up==1?'':'S'),'var(--r)'],['sys','💾','SISTEMA','BACKUP','var(--g)']];
+return `<div class="hero">BEM-VINDO, <b>NETRUNNER</b><small>${fmt(td)}</small></div><div class="tiles">${T.map(t=>`<button class="tile" style="--a:${t[4]}" onclick="go('${t[0]}')"><em>${t[1]}</em><strong>${t[2]}</strong><small>${t[3]}</small></button>`).join('')}</div>`}
+
+function vl(k){const c=K[k],f=S[k].filter(i=>fl=='all'||(fl=='p'?!i.d:i.d));
+return `<h2>// ${c.t}</h2><div class="tabs">${[['all','TODOS'],['p',c.off+'S'],['d',c.on+'S']].map(x=>`<button class="${fl==x[0]?'on':''}" onclick="fl='${x[0]}';render()">${x[1]}</button>`).join('')}</div>
+<div class="grid">${f.map(i=>`<div class="card ${i.d?'done':''}" onclick="tg('${k}','${i.id}')"><div class="ph" style="${i.img?`background-image:url('${i.img}')`:''}">${i.img?'':i.em}</div><span class="bd">${i.d?c.on:c.off}</span><div class="nm">${esc(i.n)}</div><div class="ac"><button onclick="event.stopPropagation();edit('${k}','${i.id}')">✎</button><button onclick="event.stopPropagation();del('${k}','${i.id}')">✕</button></div></div>`).join('')||'<p class="empty">NENHUM REGISTRO. TOQUE EM +</p>'}</div>
+<button class="fab" onclick="edit('${k}')">+</button>`}
+
+function vc(){const y=C.getFullYear(),m=C.getMonth(),first=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate(),td=iso(new Date());let cells='<i></i>'.repeat(first);
+for(let d=1;d<=n;d++){const s=iso(new Date(y,m,d));cells+=`<b class="${s==td?'td':''} ${s==sel?'sl':''} ${evs(s).length?'hv':''}" onclick="sel='${s}';render()">${d}</b>`}
+const l=evs(sel).sort((a,b)=>(a.t||'').localeCompare(b.t||''));
+return `<h2>// AGENDA</h2><div class="mh"><button onclick="mv(-1)">◀</button><span>${MES[m]} ${y}</span><button onclick="mv(1)">▶</button></div>
+<div class="wk">${[...'DSTQQSS'].map(x=>`<i>${x}</i>`).join('')}</div><div class="cg">${cells}</div>
+<div class="sd">${fmt(sel)}</div>${l.map(e=>`<div class="ev"><span>${e.t||'--:--'}</span><p>${esc(e.n)}${e.y?' 🔁':''}</p><button onclick="dev('${e.id}')">✕</button></div>`).join('')||'<p class="empty" style="padding:20px 0">SEM EVENTOS NESTE DIA</p>'}
+<button class="fab" onclick="ae()">+</button>`}
+
+const vs=()=>`<h2>// SISTEMA</h2><div class="panel"><p>Seus dados ficam salvos somente neste aparelho. Exporte um backup de vez em quando e guarde no iCloud ou no Drive.</p><button class="b1" onclick="exp()">EXPORTAR BACKUP</button><label class="b2">IMPORTAR BACKUP<input type="file" accept=".json,application/json" hidden onchange="imp(this)"></label></div>`;
+
+function render(){const x=[...S.buy,...S.task].filter(i=>i.d).length*10;
+$('#lv').textContent='LV '+(1+Math.floor(x/50));$('#xp').style.width=(x%50)*2+'%';
+const v=$('#v');v.style.setProperty('--a',COR[V]);v.innerHTML=({home:vh,buy:()=>vl('buy'),task:()=>vl('task'),cal:vc,sys:vs})[V]();
+document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v==V))}
+function go(v){V=v;fl='all';render();scrollTo(0,0)}
+const mv=n=>{C=new Date(C.getFullYear(),C.getMonth()+n,1);render()};
+function tg(k,id){const i=S[k].find(x=>x.id==id);i.d=i.d?0:1;save();render()}
+function del(k,id){if(confirm('EXCLUIR ESTE ITEM?')){S[k]=S[k].filter(x=>x.id!=id);save();render()}}
+function dev(id){if(confirm('EXCLUIR EVENTO?')){S.ev=S.ev.filter(x=>x.id!=id);save();render()}}
+
+function edit(k,id){const it=id?S[k].find(i=>i.id==id):{n:'',em:K[k].em[0],img:''};draft={k,id,...it};modal()}
+function modal(){const c=K[draft.k],m=$('#m');m.style.setProperty('--a',c.a);
+m.innerHTML=`<div class="sheet"><h3>${draft.id?'EDITAR':'NOVO'} // ${c.t}</h3>
+<input id="nm" placeholder="NOME" maxlength="60" value="${esc(draft.n)}" oninput="draft.n=this.value">
+<div class="ems">${c.em.map(e=>`<b class="${e==draft.em?'on':''}" onclick="draft.em='${e}';modal()">${e}</b>`).join('')}</div>
+<label class="file">${draft.img?`<img src="${draft.img}">`:''}<span>📷 ${draft.img?'TROCAR':'ADICIONAR'} FOTO</span><input type="file" accept="image/*" hidden onchange="pic(this)"></label>
+<div class="row"><button class="b2" onclick="cl()">CANCELAR</button><button class="b1" onclick="ok()">SALVAR</button></div></div>`;m.classList.add('on')}
+function pic(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();
+r.onload=()=>{const im=new Image();im.onload=()=>{const sc=Math.min(1,400/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*sc;c.height=im.height*sc;c.getContext('2d').drawImage(im,0,0,c.width,c.height);draft.img=c.toDataURL('image/jpeg',.72);modal()};im.src=r.result};r.readAsDataURL(f)}
+function ok(){if(!draft.n.trim())return $('#nm').focus();const{k,id,...rest}=draft;rest.n=rest.n.trim();
+if(id)Object.assign(S[k].find(i=>i.id==id),rest);else S[k].unshift({id:uid(),d:0,...rest});save();cl();render()}
+function cl(){const m=$('#m');m.classList.remove('on');m.innerHTML=''}
+
+function ae(){const m=$('#m');m.style.setProperty('--a','var(--r)');
+m.innerHTML=`<div class="sheet"><h3>NOVO EVENTO // AGENDA</h3><input id="en" placeholder="NOME DO EVENTO" maxlength="60"><div class="row"><input id="ed" type="date" value="${sel}"><input id="et" type="time"></div>
+<label class="ck"><input type="checkbox" id="ey"> REPETIR TODO ANO (aniversários)</label>
+<div class="row"><button class="b2" onclick="cl()">CANCELAR</button><button class="b1" onclick="se()">SALVAR</button></div></div>`;m.classList.add('on')}
+function se(){const n=$('#en').value.trim(),d=$('#ed').value;if(!n||!d)return;S.ev.push({id:uid(),n,d,t:$('#et').value,y:$('#ey').checked});sel=d;C=new Date(d+'T00:00');C.setDate(1);save();cl();render()}
+
+async function exp(){const f=new File([JSON.stringify(S)],'nightos-backup.json',{type:'application/json'});
+try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f]});return}}catch(e){if(e.name=='AbortError')return}
+const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;a.click()}
+function imp(i){const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.buy||!d.task||!d.ev)throw 0;S=d;save();render();alert('BACKUP RESTAURADO')}catch(e){alert('ARQUIVO INVÁLIDO')}};r.readAsText(i.files[0])}
+
+render();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script></body></html>
